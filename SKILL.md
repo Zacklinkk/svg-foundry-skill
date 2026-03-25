@@ -2,7 +2,7 @@
 description: "Create SVG graphics, icons, illustrations, animations, and data visualizations. Also optimize, animate, or restyle existing SVG code. Triggers on: \"draw SVG\", \"create SVG\", \"SVG icon\", \"SVG animation\", \"SVG chart\", \"SVG illustration\", \"optimize SVG\", \"SVG gradient\", \"SVG filter\", \"SVG pattern\", \"make SVG\", \"generate SVG\", \"SVG logo\", \"SVG spinner\", \"SVG progress\", \"画SVG\", \"做个SVG\", \"SVG图标\", \"SVG动画\", \"SVG图表\", \"优化SVG\"."
 ---
 
-# SVG Craft — Professional SVG Creation & Optimization
+# SVG Foundry — Professional SVG Creation & Optimization
 
 ---
 

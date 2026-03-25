@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="SVG Craft Banner" width="100%">
+  <img src="assets/banner.svg" alt="SVG Foundry Banner" width="100%">
 </p>
 
 <p align="center">
@@ -11,12 +11,12 @@
 </p>
 
 <p align="center">
-  <a href="README_zh.md">中文版</a> · <a href="SKILL_METADATA.yaml">Agent Metadata</a> · <a href="https://zacklinkk.github.io/svg-craft/">Live Demo</a>
+  <a href="README_zh.md">中文版</a> · <a href="SKILL_METADATA.yaml">Agent Metadata</a> · <a href="https://zacklinkk.github.io/svg-foundry-skill/">Live Demo</a>
 </p>
 
 ## Overview
 
-SVG Craft is a knowledge-driven AI Skill that creates, optimizes, animates, and restyles SVG graphics from scratch. It includes a comprehensive SVG technical knowledge base covering 12 core areas of the SVG specification, enabling expert-level output for any SVG task.
+SVG Foundry is a knowledge-driven AI Skill that creates, optimizes, animates, and restyles SVG graphics from scratch. It includes a comprehensive SVG technical knowledge base covering 12 core areas of the SVG specification, enabling expert-level output for any SVG task.
 
 ## Core Capabilities
 
@@ -68,7 +68,7 @@ Built-in SVG reference knowledge base with 127 reference files across 6 topics, 
 
 **Claude Code:**
 ```bash
-cp -r svg-craft ~/.claude/skills/svg-craft
+cp -r svg-foundry-skill ~/.claude/skills/svg-foundry
 ```
 
 **Other AI Agents:**

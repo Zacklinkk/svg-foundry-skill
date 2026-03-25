@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280">
-  <title>SVG Craft - Professional SVG Creation &amp; Optimization</title>
+  <title>SVG Foundry - Professional SVG Creation &amp; Optimization</title>
   <defs>
     <!-- Background gradient -->
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -70,7 +70,7 @@
   <text x="820" y="185" font-family="monospace" font-size="48" fill="rgba(255,216,111,0.12)" font-weight="300">/&gt;</text>
 
   <!-- Main title -->
-  <text x="450" y="105" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="64" font-weight="800" fill="url(#accent)" filter="url(#shadow)">SVG Craft</text>
+  <text x="450" y="105" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="64" font-weight="800" fill="url(#accent)" filter="url(#shadow)">SVG Foundry</text>
 
   <!-- Subtitle -->
   <text x="450" y="145" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="18" fill="rgba(255,255,255,0.7)" font-weight="400" letter-spacing="4">PROFESSIONAL SVG CREATION &amp; OPTIMIZATION</text>
