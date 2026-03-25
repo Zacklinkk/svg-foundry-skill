@@ -1,8 +1,18 @@
-# SVG Craft
+<p align="center">
+  <img src="assets/banner.svg" alt="SVG Craft Banner" width="100%">
+</p>
 
-**Professional SVG Creation & Optimization Skill.**
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
+  <img src="https://img.shields.io/badge/Version-1.0.0-green.svg" alt="Version">
+  <img src="https://img.shields.io/badge/References-127_files-purple.svg" alt="References">
+  <img src="https://img.shields.io/badge/SVG_Domains-12-orange.svg" alt="Domains">
+  <img src="https://img.shields.io/badge/Output_Formats-4-pink.svg" alt="Formats">
+</p>
 
-> [中文版](README_zh.md) | [Agent Metadata](SKILL_METADATA.yaml)
+<p align="center">
+  <a href="README_zh.md">中文版</a> · <a href="SKILL_METADATA.yaml">Agent Metadata</a> · <a href="https://zacklinkk.github.io/svg-craft/">Live Demo</a>
+</p>
 
 ## Overview
 

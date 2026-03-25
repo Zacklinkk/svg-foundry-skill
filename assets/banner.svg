@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280">
+  <title>SVG Craft - Professional SVG Creation &amp; Optimization</title>
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0c29"/>
+      <stop offset="50%" stop-color="#302b63"/>
+      <stop offset="100%" stop-color="#24243e"/>
+    </linearGradient>
+
+    <!-- Accent gradient -->
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f093fb"/>
+      <stop offset="50%" stop-color="#f5576c"/>
+      <stop offset="100%" stop-color="#ffd86f"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Subtle shadow -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Dot pattern -->
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="0.8" fill="rgba(255,255,255,0.08)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="280" fill="url(#bg)" rx="12"/>
+  <rect width="900" height="280" fill="url(#grid)" rx="12"/>
+  <rect width="900" height="280" fill="url(#dots)" rx="12"/>
+
+  <!-- Decorative SVG path elements (showcasing SVG capabilities) -->
+  <!-- Bezier curves in background -->
+  <path d="M 0 200 C 150 160, 300 220, 450 180 S 750 140, 900 190" fill="none" stroke="rgba(240,147,251,0.12)" stroke-width="2"/>
+  <path d="M 0 220 C 200 180, 350 240, 500 200 S 780 160, 900 210" fill="none" stroke="rgba(245,87,108,0.10)" stroke-width="1.5"/>
+  <path d="M 0 240 C 180 210, 400 260, 550 220 S 800 180, 900 230" fill="none" stroke="rgba(255,216,111,0.08)" stroke-width="1"/>
+
+  <!-- Floating geometric shapes -->
+  <!-- Pentagon -->
+  <polygon points="780,45 795,55 790,72 770,72 765,55" fill="none" stroke="rgba(240,147,251,0.25)" stroke-width="1.5" transform="rotate(15,780,58)"/>
+  <!-- Triangle -->
+  <polygon points="120,50 135,75 105,75" fill="none" stroke="rgba(245,87,108,0.2)" stroke-width="1.5"/>
+  <!-- Circle -->
+  <circle cx="830" cy="120" r="18" fill="none" stroke="rgba(255,216,111,0.2)" stroke-width="1.5"/>
+  <!-- Small diamond -->
+  <rect x="55" y="130" width="14" height="14" fill="none" stroke="rgba(240,147,251,0.2)" stroke-width="1.5" transform="rotate(45,62,137)"/>
+  <!-- Dot cluster -->
+  <circle cx="160" cy="220" r="3" fill="rgba(245,87,108,0.15)"/>
+  <circle cx="172" cy="215" r="2" fill="rgba(240,147,251,0.12)"/>
+  <circle cx="168" cy="228" r="2.5" fill="rgba(255,216,111,0.12)"/>
+
+  <!-- Code bracket decorations -->
+  <text x="50" y="145" font-family="monospace" font-size="48" fill="rgba(240,147,251,0.12)" font-weight="300">&lt;</text>
+  <text x="820" y="185" font-family="monospace" font-size="48" fill="rgba(255,216,111,0.12)" font-weight="300">/&gt;</text>
+
+  <!-- Main title -->
+  <text x="450" y="105" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="64" font-weight="800" fill="url(#accent)" filter="url(#shadow)">SVG Craft</text>
+
+  <!-- Subtitle -->
+  <text x="450" y="145" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="18" fill="rgba(255,255,255,0.7)" font-weight="400" letter-spacing="4">PROFESSIONAL SVG CREATION &amp; OPTIMIZATION</text>
+
+  <!-- Divider line -->
+  <line x1="280" y1="168" x2="620" y2="168" stroke="url(#accent)" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Feature pills -->
+  <!-- Create -->
+  <rect x="175" y="188" width="100" height="32" rx="16" fill="rgba(240,147,251,0.15)" stroke="rgba(240,147,251,0.3)" stroke-width="1"/>
+  <text x="225" y="209" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="rgba(240,147,251,0.9)" font-weight="600">Create</text>
+
+  <!-- Optimize -->
+  <rect x="295" y="188" width="110" height="32" rx="16" fill="rgba(245,87,108,0.15)" stroke="rgba(245,87,108,0.3)" stroke-width="1"/>
+  <text x="350" y="209" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="rgba(245,87,108,0.9)" font-weight="600">Optimize</text>
+
+  <!-- Animate -->
+  <rect x="425" y="188" width="110" height="32" rx="16" fill="rgba(255,216,111,0.15)" stroke="rgba(255,216,111,0.3)" stroke-width="1"/>
+  <text x="480" y="209" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="rgba(255,216,111,0.9)" font-weight="600">Animate</text>
+
+  <!-- Restyle -->
+  <rect x="555" y="188" width="100" height="32" rx="16" fill="rgba(100,200,255,0.15)" stroke="rgba(100,200,255,0.3)" stroke-width="1"/>
+  <text x="605" y="209" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="rgba(100,200,255,0.9)" font-weight="600">Restyle</text>
+
+  <!-- Bottom tagline -->
+  <text x="450" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="rgba(255,255,255,0.35)" letter-spacing="1">Knowledge-driven AI Skill  ·  127 Reference Files  ·  12 SVG Domains  ·  4 Output Formats</text>
+</svg>

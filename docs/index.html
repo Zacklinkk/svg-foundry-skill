@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Craft — Live Demo Gallery</title>
+  <style>
+    :root {
+      --bg: #0f0c29;
+      --bg2: #302b63;
+      --bg3: #24243e;
+      --pink: #f093fb;
+      --red: #f5576c;
+      --gold: #ffd86f;
+      --blue: #64c8ff;
+      --text: #e0e0e0;
+      --text-dim: rgba(255,255,255,0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--bg), var(--bg2), var(--bg3));
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--pink), var(--red), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+
+    .gallery {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .card-demo {
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .card-info {
+      padding: 20px 24px;
+    }
+
+    .card-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-info p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+    }
+
+    .badge-css { background: rgba(240,147,251,0.15); color: var(--pink); }
+    .badge-smil { background: rgba(245,87,108,0.15); color: var(--red); }
+    .badge-filter { background: rgba(255,216,111,0.15); color: var(--gold); }
+    .badge-gradient { background: rgba(100,200,255,0.15); color: var(--blue); }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--pink);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SVG Craft</h1>
+  <p>LIVE ANIMATION GALLERY</p>
+</header>
+
+<div class="gallery">
+
+  <!-- 1. Loading Spinner -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="80" height="80" viewBox="0 0 50 50">
+        <title>Loading Spinner</title>
+        <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+        <circle cx="25" cy="25" r="20" fill="none" stroke="url(#spinner-grad)" stroke-width="4"
+                stroke-linecap="round" stroke-dasharray="80 45">
+          <animateTransform attributeName="transform" type="rotate"
+                            from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <defs>
+          <linearGradient id="spinner-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f093fb"/>
+            <stop offset="100%" stop-color="#f5576c"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Gradient Spinner</h3>
+      <p>Smooth rotating spinner with gradient stroke and SMIL animation.</p>
+      <span class="badge badge-smil">SMIL</span>
+      <span class="badge badge-gradient">GRADIENT</span>
+    </div>
+  </div>
+
+  <!-- 2. Pulse Ring -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <title>Pulse Ring</title>
+        <circle cx="60" cy="60" r="20" fill="rgba(245,87,108,0.8)"/>
+        <circle cx="60" cy="60" r="20" fill="none" stroke="#f5576c" stroke-width="2" opacity="1">
+          <animate attributeName="r" from="20" to="50" dur="1.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" from="0.8" to="0" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="60" cy="60" r="20" fill="none" stroke="#f5576c" stroke-width="2" opacity="1">
+          <animate attributeName="r" from="20" to="50" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" from="0.8" to="0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="60" cy="60" r="20" fill="none" stroke="#f5576c" stroke-width="2" opacity="1">
+          <animate attributeName="r" from="20" to="50" dur="1.5s" begin="1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" from="0.8" to="0" dur="1.5s" begin="1s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Pulse Ring</h3>
+      <p>Staggered concentric ripple animation for notification or status indicators.</p>
+      <span class="badge badge-smil">SMIL</span>
+    </div>
+  </div>
+
+  <!-- 3. Stroke Drawing -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="160" height="120" viewBox="0 0 160 120">
+        <title>Stroke Drawing Animation</title>
+        <style>
+          .draw-star {
+            fill: none;
+            stroke: url(#star-grad);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 500;
+            stroke-dashoffset: 500;
+            animation: drawStar 3s ease forwards infinite;
+          }
+          @keyframes drawStar {
+            0% { stroke-dashoffset: 500; opacity: 0.3; }
+            50% { stroke-dashoffset: 0; opacity: 1; }
+            70% { stroke-dashoffset: 0; opacity: 1; }
+            100% { stroke-dashoffset: -500; opacity: 0.3; }
+          }
+        </style>
+        <defs>
+          <linearGradient id="star-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffd86f"/>
+            <stop offset="100%" stop-color="#f093fb"/>
+          </linearGradient>
+        </defs>
+        <path class="draw-star" d="M80 10 L95 45 L133 50 L105 75 L112 112 L80 95 L48 112 L55 75 L27 50 L65 45 Z"/>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Stroke Drawing</h3>
+      <p>Star shape drawn with stroke-dasharray animation and gradient stroke.</p>
+      <span class="badge badge-css">CSS</span>
+      <span class="badge badge-gradient">GRADIENT</span>
+    </div>
+  </div>
+
+  <!-- 4. Morphing Blob -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="150" height="150" viewBox="0 0 200 200">
+        <title>Morphing Blob</title>
+        <defs>
+          <linearGradient id="blob-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f093fb"/>
+            <stop offset="50%" stop-color="#f5576c"/>
+            <stop offset="100%" stop-color="#ffd86f"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#blob-grad)" opacity="0.8">
+          <animate attributeName="d" dur="6s" repeatCount="indefinite" values="
+            M 100,40 C 140,40 170,60 170,100 C 170,140 140,170 100,160 C 60,150 30,140 30,100 C 30,60 60,40 100,40 Z;
+            M 100,30 C 150,50 180,70 160,110 C 140,150 120,170 90,160 C 60,150 20,130 40,90 C 60,50 50,10 100,30 Z;
+            M 110,35 C 145,45 175,80 165,115 C 155,150 130,175 95,165 C 60,155 25,120 35,85 C 45,50 75,25 110,35 Z;
+            M 100,40 C 140,40 170,60 170,100 C 170,140 140,170 100,160 C 60,150 30,140 30,100 C 30,60 60,40 100,40 Z;
+          "/>
+        </path>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Morphing Blob</h3>
+      <p>Organic blob shape with smooth path morphing using SMIL animate.</p>
+      <span class="badge badge-smil">SMIL</span>
+      <span class="badge badge-gradient">GRADIENT</span>
+    </div>
+  </div>
+
+  <!-- 5. Particle Float -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="200" height="140" viewBox="0 0 200 140">
+        <title>Floating Particles</title>
+        <style>
+          .particle { animation: float 3s ease-in-out infinite; }
+          .p1 { animation-delay: 0s; }
+          .p2 { animation-delay: 0.4s; }
+          .p3 { animation-delay: 0.8s; }
+          .p4 { animation-delay: 1.2s; }
+          .p5 { animation-delay: 1.6s; }
+          .p6 { animation-delay: 2.0s; }
+          @keyframes float {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-15px); opacity: 1; }
+          }
+        </style>
+        <circle class="particle p1" cx="30" cy="80" r="6" fill="#f093fb"/>
+        <circle class="particle p2" cx="65" cy="60" r="9" fill="#f5576c"/>
+        <circle class="particle p3" cx="100" cy="90" r="5" fill="#ffd86f"/>
+        <circle class="particle p4" cx="130" cy="50" r="8" fill="#64c8ff"/>
+        <circle class="particle p5" cx="160" cy="75" r="7" fill="#f093fb"/>
+        <circle class="particle p6" cx="185" cy="55" r="5" fill="#f5576c"/>
+        <circle class="particle p3" cx="45" cy="110" r="4" fill="#64c8ff"/>
+        <circle class="particle p5" cx="150" cy="105" r="4" fill="#ffd86f"/>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Floating Particles</h3>
+      <p>Staggered floating animation with CSS keyframes and delay offsets.</p>
+      <span class="badge badge-css">CSS</span>
+    </div>
+  </div>
+
+  <!-- 6. Glowing Text -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="220" height="80" viewBox="0 0 220 80">
+        <title>Glowing Text Effect</title>
+        <defs>
+          <filter id="text-glow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f093fb">
+              <animate attributeName="stop-color" values="#f093fb;#ffd86f;#64c8ff;#f093fb" dur="4s" repeatCount="indefinite"/>
+            </stop>
+            <stop offset="100%" stop-color="#ffd86f">
+              <animate attributeName="stop-color" values="#ffd86f;#64c8ff;#f093fb;#ffd86f" dur="4s" repeatCount="indefinite"/>
+            </stop>
+          </linearGradient>
+        </defs>
+        <text x="110" y="52" text-anchor="middle"
+              font-family="system-ui, sans-serif" font-size="36" font-weight="800"
+              fill="url(#text-grad)" filter="url(#text-glow)">
+          SVG
+        </text>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Glowing Text</h3>
+      <p>Text with animated gradient fill and Gaussian blur glow filter effect.</p>
+      <span class="badge badge-filter">FILTER</span>
+      <span class="badge badge-gradient">GRADIENT</span>
+      <span class="badge badge-smil">SMIL</span>
+    </div>
+  </div>
+
+  <!-- 7. Progress Ring -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <title>Progress Ring</title>
+        <style>
+          .progress-ring {
+            transform: rotate(-90deg);
+            transform-origin: 60px 60px;
+          }
+          .progress-track { stroke: rgba(255,255,255,0.08); }
+          .progress-fill {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            animation: fillProgress 2.5s ease-out forwards infinite;
+          }
+          @keyframes fillProgress {
+            0% { stroke-dashoffset: 283; }
+            60% { stroke-dashoffset: 56; }
+            100% { stroke-dashoffset: 56; }
+          }
+        </style>
+        <defs>
+          <linearGradient id="prog-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#64c8ff"/>
+            <stop offset="100%" stop-color="#f093fb"/>
+          </linearGradient>
+        </defs>
+        <circle class="progress-ring progress-track" cx="60" cy="60" r="45" fill="none" stroke-width="8"/>
+        <circle class="progress-ring progress-fill" cx="60" cy="60" r="45" fill="none"
+                stroke="url(#prog-grad)" stroke-width="8" stroke-linecap="round"/>
+        <text x="60" y="65" text-anchor="middle" font-family="system-ui, sans-serif"
+              font-size="22" font-weight="700" fill="white">80%</text>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Progress Ring</h3>
+      <p>Circular progress indicator with gradient stroke and dashoffset animation.</p>
+      <span class="badge badge-css">CSS</span>
+      <span class="badge badge-gradient">GRADIENT</span>
+    </div>
+  </div>
+
+  <!-- 8. Wave Pattern -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="220" height="100" viewBox="0 0 220 100">
+        <title>Wave Animation</title>
+        <defs>
+          <linearGradient id="wave-grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#f093fb" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#f093fb" stop-opacity="0.05"/>
+          </linearGradient>
+          <linearGradient id="wave-grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#64c8ff" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#64c8ff" stop-opacity="0.03"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#wave-grad1)">
+          <animate attributeName="d" dur="4s" repeatCount="indefinite" values="
+            M0,50 C30,30 60,30 110,50 C160,70 190,70 220,50 L220,100 L0,100 Z;
+            M0,50 C30,70 60,70 110,50 C160,30 190,30 220,50 L220,100 L0,100 Z;
+            M0,50 C30,30 60,30 110,50 C160,70 190,70 220,50 L220,100 L0,100 Z;
+          "/>
+        </path>
+        <path fill="url(#wave-grad2)">
+          <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
+            M0,60 C40,45 80,45 120,60 C160,75 200,75 220,60 L220,100 L0,100 Z;
+            M0,60 C40,75 80,75 120,60 C160,45 200,45 220,60 L220,100 L0,100 Z;
+            M0,60 C40,45 80,45 120,60 C160,75 200,75 220,60 L220,100 L0,100 Z;
+          "/>
+        </path>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Wave Animation</h3>
+      <p>Layered wave effect with path morphing and gradient fills.</p>
+      <span class="badge badge-smil">SMIL</span>
+      <span class="badge badge-gradient">GRADIENT</span>
+    </div>
+  </div>
+
+  <!-- 9. Orbiting Dots -->
+  <div class="card">
+    <div class="card-demo">
+      <svg width="140" height="140" viewBox="0 0 140 140">
+        <title>Orbiting Dots</title>
+        <style>
+          .orbit { animation: spin-orbit 3s linear infinite; transform-origin: 70px 70px; }
+          .orbit-reverse { animation: spin-orbit 4s linear infinite reverse; transform-origin: 70px 70px; }
+          @keyframes spin-orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        </style>
+        <circle cx="70" cy="70" r="6" fill="#ffd86f" opacity="0.8"/>
+        <circle cx="70" cy="70" r="30" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <circle cx="70" cy="70" r="48" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+        <g class="orbit">
+          <circle cx="100" cy="70" r="5" fill="#f093fb"/>
+          <circle cx="40" cy="70" r="3" fill="#f5576c" opacity="0.6"/>
+        </g>
+        <g class="orbit-reverse">
+          <circle cx="70" cy="22" r="4" fill="#64c8ff"/>
+          <circle cx="70" cy="118" r="3" fill="#ffd86f" opacity="0.5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="card-info">
+      <h3>Orbiting Dots</h3>
+      <p>Multi-layer orbital animation with counter-rotating groups.</p>
+      <span class="badge badge-css">CSS</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    Built with <strong>SVG Craft</strong> —
+    <a href="https://github.com/Zacklinkk/svg-craft">GitHub Repository</a> ·
+    Apache License 2.0
+  </p>
+</footer>
+
+</body>
+</html>
