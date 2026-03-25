@@ -1,0 +1,1 @@
+Chapter 9. A New Point of ViewChapter 9. Cropping Embedded SVG Files

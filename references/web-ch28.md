@@ -1,0 +1,4 @@
+Part IV. Artistic Touches
+A complete SVG graphic is more than coordinates, shape, and layout.  That basic structure must be translated to its final appearance on screen or paper—it must be *rendered*, in computer graphics terminology—through the application of colors, lines, and patterns to the shapes.  Other stylistic manipluations can soften the crisp edges or shapes, or otherwise alter the formal mathematical geometry of the SVG structure.
+
+The next few chapters explore the artistic side of SVG: how color is used, how the strokes that outline shape are created and manipulated, and how graphical effects like filters and masks are applied.  Many of these graphical effects are being adopted into CSS styling as well, so we’ll continue to highlight the similarities and differences.

@@ -1,0 +1,152 @@
+name: svg-craft
+version: 1.0.0
+type: knowledge-driven-skill
+license: Apache-2.0
+
+triggers:
+  keywords_zh:
+    - 画SVG
+    - 做个SVG
+    - SVG图标
+    - SVG动画
+    - SVG图表
+    - 优化SVG
+  keywords_en:
+    - draw SVG
+    - create SVG
+    - SVG icon
+    - SVG animation
+    - SVG chart
+    - SVG illustration
+    - optimize SVG
+    - SVG gradient
+    - SVG filter
+    - SVG pattern
+    - make SVG
+    - generate SVG
+    - SVG logo
+    - SVG spinner
+    - SVG progress
+  slash_command: /svg-craft
+
+capabilities:
+  - id: create
+    description: Build SVG from scratch based on a natural language description
+    description_zh: 根据自然语言描述从零生成 SVG
+    examples:
+      - icon
+      - illustration
+      - chart
+      - logo
+      - loading animation
+      - data visualization
+  - id: optimize
+    description: Improve existing SVG code
+    description_zh: 优化现有 SVG 代码
+    examples:
+      - performance optimization
+      - accessibility
+      - responsive adaptation
+      - code simplification
+  - id: animate
+    description: Add animation effects to static SVG
+    description_zh: 为静态 SVG 添加动画效果
+    examples:
+      - CSS animation
+      - SMIL animation
+      - stroke drawing
+      - path morphing
+  - id: restyle
+    description: Adjust SVG visual style
+    description_zh: 调整 SVG 的视觉风格
+    examples:
+      - color scheme
+      - gradient
+      - pattern
+      - filter
+
+output_formats:
+  - id: svg
+    description: Standalone .svg markup, embeddable anywhere
+  - id: html
+    description: Complete HTML page with inline SVG + CSS animations
+  - id: react
+    description: JSX component with customizable props
+  - id: vue
+    description: SFC with template + scoped styles
+
+tech_coverage:
+  - Canvas & coordinate systems (viewBox, preserveAspectRatio)
+  - Basic & advanced shapes (rect, circle, path)
+  - Path commands (M/L/H/V/C/S/Q/T/A/Z)
+  - Text layout (text, tspan, textPath)
+  - Colors & fills
+  - Gradients (linear, radial)
+  - Patterns
+  - Transforms (translate, rotate, scale, matrix)
+  - Clipping & masking (clipPath, mask)
+  - Filters (blur, shadow, colorMatrix, turbulence)
+  - Stroke properties
+  - Markers
+
+knowledge_base:
+  total_files: 127
+  loading_strategy: on-demand
+  entry_point: SKILL.md
+  references_dir: references/
+  topics:
+    - prefix: essentials
+      name: SVG Essentials
+      name_zh: SVG 基础
+      files: 17
+      scope: Shapes, coordinates, paths, transforms, filters
+    - prefix: text
+      name: Text Layout
+      name_zh: 文本排版
+      files: 21
+      scope: Text positioning, text paths, internationalization
+    - prefix: colors
+      name: Colors, Patterns & Gradients
+      name_zh: 颜色与视觉
+      files: 20
+      scope: Colors, gradients, patterns, textures
+    - prefix: animation
+      name: Animations
+      name_zh: 动画
+      files: 9
+      scope: CSS animations, sprites, responsive animation, data visualization
+    - prefix: web
+      name: SVG + CSS3 + HTML5
+      name_zh: Web 集成
+      files: 51
+      scope: Embedding, styling, accessibility, interactivity, best practices
+    - prefix: modern
+      name: Modern SVG
+      name_zh: 现代技术
+      files: 9
+      scope: Modern toolchains, advanced paths, modern color techniques
+
+workflow:
+  steps:
+    - id: 1
+      name: Clarify Requirements
+      description: Determine task type and output format
+    - id: 2
+      name: Design the SVG
+      description: Apply SVG knowledge across 12 technical domains
+    - id: 3
+      name: Add Animation
+      description: CSS, SMIL, or stroke drawing animation (if needed)
+    - id: 4
+      name: Web Integration
+      description: Embedding, responsiveness, accessibility, performance
+    - id: 5
+      name: Output & Deliver
+      description: Validate and format final SVG output
+
+compatibility:
+  - platform: Claude Code
+    install_path: ~/.claude/skills/svg-craft
+    method: Copy directory to skills path
+  - platform: Other AI Agents
+    method: Load SKILL.md as system prompt, mount references/ as searchable knowledge base

@@ -1,0 +1,4 @@
+Part V. SVG as an Application
+The final few chapters of the book consider SVG on the web as an interactive application.  They explore how you can add extra information to your graphic to make it more accessible to both human beings and computers, and how you can manipulate your graphic to make it interactive or animated.  It is only a brief introduction to the full possibilities of SVG applications, however: web development with SVG is as large and diverse a topic as web development in general.
+
+Chapter 20 ends the book with a summary of tips and best practices for creating SVG code that will be easier for you to work with—and easier for all users to appreciate.
