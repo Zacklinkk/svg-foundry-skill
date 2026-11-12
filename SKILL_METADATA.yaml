@@ -1,7 +1,9 @@
-name: svg-foundry
+name: svg-craft
+display_name: SVG Foundry
 version: 1.0.0
 type: knowledge-driven-skill
 license: Apache-2.0
+license_note: Third-party book-derived references require separate permission verification; see README.
 
 triggers:
   keywords_zh:
@@ -28,6 +30,7 @@ triggers:
     - SVG spinner
     - SVG progress
   slash_command: /svg-craft
+  invocation_note: Command support depends on the host harness.
 
 capabilities:
   - id: create
@@ -130,7 +133,7 @@ workflow:
   steps:
     - id: 1
       name: Clarify Requirements
-      description: Determine task type and output format
+      description: Infer task type and project format; ask only about consequential missing choices
     - id: 2
       name: Design the SVG
       description: Apply SVG knowledge across 12 technical domains
@@ -145,8 +148,7 @@ workflow:
       description: Validate and format final SVG output
 
 compatibility:
-  - platform: Claude Code
-    install_path: ~/.claude/skills/svg-craft
-    method: Copy directory to skills path
+  - platform: Agent harnesses with skill discovery
+    method: Register or symlink one canonical source as svg-craft; preserve relative reference paths
   - platform: Other AI Agents
-    method: Load SKILL.md as system prompt, mount references/ as searchable knowledge base
+    method: Load relevant instructions and references through the host-supported mechanism

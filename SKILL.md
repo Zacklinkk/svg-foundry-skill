@@ -1,14 +1,17 @@
 ---
-description: "Create SVG graphics, icons, illustrations, animations, and data visualizations. Also optimize, animate, or restyle existing SVG code. Triggers on: \"draw SVG\", \"create SVG\", \"SVG icon\", \"SVG animation\", \"SVG chart\", \"SVG illustration\", \"optimize SVG\", \"SVG gradient\", \"SVG filter\", \"SVG pattern\", \"make SVG\", \"generate SVG\", \"SVG logo\", \"SVG spinner\", \"SVG progress\", \"画SVG\", \"做个SVG\", \"SVG图标\", \"SVG动画\", \"SVG图表\", \"优化SVG\"."
+name: svg-craft
+description: Create, edit, animate, and optimize SVG icons, illustrations, diagrams, and charts; includes guidance for responsive layout, accessibility, filters, text, and web-component output. Use for SVG-specific authoring and debugging.
 ---
 
-# SVG Foundry — Professional SVG Creation & Optimization
+# SVG Foundry (`svg-craft`) — SVG Authoring & Optimization
+
+Local reference collection drawn from SVG books (third-party source and redistribution rights require separate verification): *SVG Essentials*, *SVG Text Layout*, *SVG Colors Patterns & Gradients*, *SVG Animations*, *Using SVG with CSS3 and HTML5*, *Modern SVG*.
 
 ---
 
 ## Step 1 — Clarify Requirements
 
-Before writing any SVG code, use `AskUserQuestion` to determine:
+Infer the task and output format from the request and project. Ask only when an unresolved choice materially changes the result; do not repeat questions the user already answered.
 
 **1. Task type** (if not obvious from the request):
 - **Create**: Build SVG from scratch based on a description
@@ -16,7 +19,7 @@ Before writing any SVG code, use `AskUserQuestion` to determine:
 - **Animate**: Add motion/transitions to static SVG
 - **Restyle**: Change colors, gradients, patterns, filters
 
-**2. Output format** (always ask unless user specifies):
+**2. Output format** (use the project framework; otherwise default to standalone SVG):
 - **Pure SVG**: Standalone `.svg` markup, embeddable anywhere
 - **HTML + SVG**: Complete HTML page with inline SVG + CSS animations
 - **React component**: JSX component with props for customization
@@ -29,9 +32,9 @@ Before writing any SVG code, use `AskUserQuestion` to determine:
 Follow this structured approach based on the SVG knowledge base:
 
 ### 2.1 Canvas & Coordinate System
-- Always set `viewBox` for responsive scaling (ref: essentials ch05)
+- Always set `viewBox` for responsive scaling (ref: essentials ch03)
 - Use `preserveAspectRatio` when aspect ratio control matters
-- Default to `viewBox="0 0 width height"` with no fixed `width`/`height` for responsive embedding
+- Set a useful `viewBox`; choose `width`/`height` or CSS sizing for the actual embedding context. Explicit intrinsic dimensions can coexist with responsive scaling.
 - Consider the coordinate system: SVG y-axis goes downward
 
 ### 2.2 Shape Selection
@@ -55,14 +58,14 @@ Choose the right primitives (ref: essentials ch02, ch03):
 - **A/a** — elliptical arc (rx ry rotation large-arc sweep x y)
 - **Z** — close path
 
-### 2.4 Text Handling (ref: text topic)
+### 2.4 Text Handling (ref: text; read only the relevant chapter)
 - `<text>` with `x`, `y`, `font-family`, `font-size`
 - `<tspan>` for inline formatting changes
-- `<textPath>` for text along a path (xlink:href to path id)
+- `<textPath href="#path-id">` for text along a path; use legacy `xlink:href` only when a stated compatibility target requires it
 - `dominant-baseline` and `text-anchor` for alignment
 - Consider `lengthAdjust` and `textLength` for fitted text
 
-### 2.5 Colors & Fills (ref: colors topic)
+### 2.5 Colors & Fills (ref: colors; read only the relevant chapter)
 - Named colors, hex (#RRGGBB / #RGB), rgb(), hsl()
 - `fill` and `stroke` properties
 - `fill-opacity`, `stroke-opacity`, `opacity`
@@ -72,14 +75,14 @@ Choose the right primitives (ref: essentials ch02, ch03):
 ```xml
 <!-- Linear gradient -->
 <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-  <stop offset="0%" stop-color="#color1"/>
-  <stop offset="100%" stop-color="#color2"/>
+  <stop offset="0%" stop-color="#2563eb"/>
+  <stop offset="100%" stop-color="#7c3aed"/>
 </linearGradient>
 
 <!-- Radial gradient -->
 <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
-  <stop offset="0%" stop-color="#center"/>
-  <stop offset="100%" stop-color="#edge"/>
+  <stop offset="0%" stop-color="#fef3c7"/>
+  <stop offset="100%" stop-color="#f59e0b"/>
 </radialGradient>
 ```
 - `gradientUnits`: `objectBoundingBox` (default, %) vs `userSpaceOnUse` (absolute)
@@ -154,12 +157,12 @@ Common filter primitives:
 
 ## Step 3 — Add Animation (if needed)
 
-Load reference: animation topic for animation patterns.
+Read the relevant chapter in animation (SVG Animations) for the requested animation pattern.
 
 ### 3.1 CSS Animations (preferred for simple animations)
 ```css
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.spinner { animation: spin 1s linear infinite; transform-origin: center; }
+.spinner { animation: spin 1s linear infinite; transform-box: fill-box; transform-origin: center; }
 ```
 
 ### 3.2 SVG SMIL Animations (for path morphing, gradient animation)
@@ -181,9 +184,9 @@ Load reference: animation topic for animation patterns.
 Calculate actual path length with `getTotalLength()` or estimate.
 
 ### 3.4 Animation Best Practices (ref: animation ch07)
-- Prefer CSS animations for transforms and opacity (GPU-accelerated)
+- Prefer simple transform/opacity animation when appropriate; verify actual rendering cost rather than promising GPU acceleration
 - Use SMIL for SVG-specific attributes (path d, gradient stops)
-- `will-change: transform` for performance hints
+- Add `will-change` only for a measured need, and avoid keeping unnecessary promoted layers alive
 - Avoid animating filter properties (expensive)
 - Use `prefers-reduced-motion` media query for accessibility
 
@@ -207,10 +210,10 @@ Calculate actual path length with `getTotalLength()` or estimate.
 ```
 
 ### 4.3 Accessibility (ref: web ch39-ch40)
-- Always include `<title>` and `<desc>` elements
-- Use `role="img"` on the `<svg>` element
-- `aria-labelledby="titleId descId"` for screen readers
-- `aria-hidden="true"` for decorative SVGs
+- For informative inline SVG, provide an accessible name (for example `<title>` with `aria-labelledby`) and `role="img"` where appropriate; add a useful description for complex content.
+- For decorative inline SVG, use `aria-hidden="true"` and keep it out of keyboard focus; do not add redundant announced labels.
+- For an SVG embedded through `<img>`, supply the meaning in the image's `alt` attribute, or `alt=""` when decorative.
+- Keep every referenced ID unique per component instance, including gradients, masks, clips, titles and descriptions.
 
 ### 4.4 Performance Best Practices (ref: web ch45-ch47)
 - Simplify paths: reduce control points, use relative commands
@@ -225,8 +228,8 @@ Calculate actual path length with `getTotalLength()` or estimate.
 
 ### Output Rules:
 1. **SVG must be valid** — proper namespace `xmlns="http://www.w3.org/2000/svg"`
-2. **Always include viewBox** — no hardcoded width/height unless user specifies
-3. **Include `<title>`** for accessibility
+2. **Include a suitable viewBox** — choose explicit or fluid dimensions to match the target
+3. **Choose accessibility semantics** for informative or decorative use; do not force a title onto every decorative asset
 4. **Use `<defs>` for reusable elements** (gradients, patterns, filters, clips)
 5. **Use semantic IDs** — meaningful names, not `rect1` or `path23`
 6. **Indent properly** — readable, well-structured markup
@@ -238,16 +241,24 @@ Calculate actual path length with `getTotalLength()` or estimate.
 - **React**: `export function SvgComponent({ size, color, ...props })` with configurable props
 - **Vue**: `<template>` + `<style scoped>` SFC format
 
+### Validate the actual deliverable
+- Parse standalone SVG as XML; inspect unresolved fragment references and duplicate IDs.
+- Preview at the intended dimensions and a smaller size when a renderer/browser is available. Check clipped strokes/filters, legible text and actual font availability.
+- For repeated components, check multiple instances on the same page; preserve IDs used by CSS, accessibility or external code during optimization.
+- Check reduced-motion behavior for animations. Report which checks actually ran; a valid XML parse alone does not establish visual quality or accessibility.
+
+Current standards: [SVG 2 references and legacy XLink](https://www.w3.org/TR/SVG2/linking.html), [SVG 2 coordinate systems and sizing](https://www.w3.org/TR/SVG2/coords.html), [WAI decorative image guidance](https://www.w3.org/WAI/tutorials/images/decorative/). Consult the relevant current specification when an older book example conflicts with the target runtime.
+
 ---
 
 ## References Index — When to Load Which Chapter
 
 Use `Read` to load specific reference files when you need detailed syntax or examples.
 
-### Topic: SVG Essentials (essentials-*)
+### Book 1: SVG Essentials (essentials-*)
 | File | Topic | Load when... |
 |------|-------|-------------|
-| ch01 | Cover + TOC | Understanding structure |
+| ch01 | Cover + TOC | Understanding book structure |
 | ch02 | Ch1: Basic shapes | Drawing rect, circle, ellipse, line, polygon |
 | ch03 | Ch2: Coordinates | Viewport, viewBox, units, coordinate systems |
 | ch04 | Ch3: Paths | Path commands (M, L, C, Q, A, Z) |
@@ -260,14 +271,14 @@ Use `Read` to load specific reference files when you need detailed syntax or exa
 | ch11 | Ch11: Filters | All filter primitives (blur, shadow, color, composite) |
 | ch14 | Ch14: Advanced | SVG + JavaScript interaction |
 
-### Topic: Text Layout (text-*)
+### Book 2: SVG Text Layout (text-*)
 | File | Topic | Load when... |
 |------|-------|-------------|
 | ch04 | Ch1: Text basics | `<text>`, positioning, styling |
 | ch08 | Ch5: textPath | Text on a path |
 | ch11-ch13 | Ch8-10: Advanced | Multi-line, wrapping, international text |
 
-### Topic: Colors, Patterns & Gradients (colors-*)
+### Book 3: SVG Colors, Patterns & Gradients (colors-*)
 | File | Topic | Load when... |
 |------|-------|-------------|
 | ch05 | Ch2: Painter's model | fill/stroke rendering order |
@@ -282,7 +293,7 @@ Use `Read` to load specific reference files when you need detailed syntax or exa
 | ch15 | Ch12: Text painting | Textured/gradient text |
 | ch16 | Ch13: Strokes | Stroke gradients, stroke patterns |
 
-### Topic: Animations (animation-*)
+### Book 4: SVG Animations (animation-*)
 | File | Topic | Load when... |
 |------|-------|-------------|
 | ch03 | Ch1: SVG anatomy | SVG structure for animation |
@@ -292,7 +303,7 @@ Use `Read` to load specific reference files when you need detailed syntax or exa
 | ch07 | Ch5: UI/UX animation | Loading, hover, micro-interactions |
 | ch08 | Ch6: Data viz animation | Chart animation, data-driven motion |
 
-### Topic: SVG + CSS3 + HTML5 (web-*)
+### Book 5: Using SVG with CSS3 and HTML5 (web-*)
 | File | Topic | Load when... |
 |------|-------|-------------|
 | ch06 | Ch1: SVG overview | SVG on the web, history |
@@ -316,7 +327,7 @@ Use `Read` to load specific reference files when you need detailed syntax or exa
 | ch44 | Ch19: Animation | CSS + SMIL animation techniques |
 | ch47 | Ch20: Best practices | Performance, optimization, patterns |
 
-### Topic: Modern SVG (modern-*)
+### Book 6: Modern SVG (modern-*)
 | File | Topic | Load when... |
 |------|-------|-------------|
 | ch04 | Ch1: SVG in web pages | Modern embedding best practices |

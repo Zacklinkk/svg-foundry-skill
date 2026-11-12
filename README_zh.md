@@ -1,101 +1,98 @@
-<p align="center">
-  <img src="assets/banner.svg" alt="SVG Foundry Banner" width="100%">
-</p>
+# SVG Foundry (`svg-craft`)
 
-<p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/Version-1.0.0-green.svg" alt="Version">
-  <img src="https://img.shields.io/badge/References-127_files-purple.svg" alt="References">
-  <img src="https://img.shields.io/badge/SVG_Domains-12-orange.svg" alt="Domains">
-  <img src="https://img.shields.io/badge/Output_Formats-4-pink.svg" alt="Formats">
-</p>
+[English](README.md) | [中文](README_zh.md)
 
-<p align="center">
-  <a href="README.md">English</a> · <a href="SKILL_METADATA.yaml">Agent Metadata</a> · <a href="https://zacklinkk.github.io/svg-foundry-skill/">Live Demo</a>
-</p>
+**SVG Foundry** 提供名为 `svg-craft` 的智能体技能（Skill），旨在为大语言模型与开发工具提供结构化的 SVG 编写、优化、动画制作与样式重构指导规范。
 
-# SVG Foundry
+本技能为矢量图形编写提供指导，支持四种输出格式：
 
-**专业的 SVG 创作与优化 Skill。**
+- **独立 SVG**：具备规范命名空间与 `viewBox` 的标准 `.svg` 标记。
+- **HTML + SVG**：包含内联 SVG 与 CSS 动画的完整 HTML 文档。
+- **React JSX**：支持接收 `size`、`color` 及自定义样式的组件代码。
+- **Vue SFC**：包含 `<template>` 与 `<style scoped>` 的单文件组件。
 
-## 简介
+---
 
-SVG Foundry 是一个基于知识驱动的 AI Skill，能够从零创建、优化、添加动画、重新设计 SVG 图形。内置完整的 SVG 技术知识体系，涵盖规范的 12 个核心领域，让 AI 在处理 SVG 任务时拥有专家级的技术深度。
+## 覆盖范围与技术准则
 
-## 核心能力
+`svg-craft` 针对 SVG 开发的核心环节提供具体约束与规则：
 
-- **Create** — 根据自然语言描述生成 SVG 图标、插画、图表、Logo、加载动画等
-- **Optimize** — 优化现有 SVG 代码的性能、可访问性与响应式适配
-- **Animate** — 为静态 SVG 添加 CSS 动画、SMIL 动画或描边绘制效果
-- **Restyle** — 调整配色方案、渐变、图案、滤镜等视觉风格
+- **视口与坐标系**：规范 `viewBox` 设置，根据实际嵌入环境处理明确尺寸或响应式流式布局，注意 Y 轴向下的坐标规则。
+- **图形与路径**：覆盖基础图形（`<rect>`、`<circle>` 等）与路径指令（`M`、`C`、`S`、`Q`、`A`、`Z`）。
+- **样式与复用定义**：规范线性与径向渐变、图案（Pattern）、标记符号（Marker）以及滤镜原语（如 `feDropShadow`、`feGaussianBlur`、`feColorMatrix`）。
+- **现代标准优先**：统一采用现代 SVG 2 的 `href` 属性；仅在明确需要向下兼容旧环境时才生成废弃的 `xlink:href`。
+- **组件实例隔离**：要求渐变、蒙版、剪切路径及无障碍关联的 `id` 保持唯一，避免同一组件在页面上多次渲染时发生 ID 冲突。
+- **动画规范**：支持 CSS `@keyframes` 与 SMIL（`<animate>`、`<animateTransform>`）；指导实现减少动态效果时的行为，不保证硬件 GPU 加速效果。
+- **无障碍语义**：信息型内联 SVG 需要可访问的名称，例如用 `aria-labelledby` 关联 `<title>`，并选择适当角色；纯装饰内联 SVG 应避免重复播报。通过 `<img>` 嵌入时，设置符合用途的 `alt`。具体选择取决于使用语境。
 
-## 输出格式
+---
 
-| 格式 | 适用场景 |
-|------|---------|
-| Pure SVG | 独立 `.svg` 文件，可嵌入任何环境 |
-| HTML + SVG | 完整 HTML 页面，含内联 SVG 与 CSS 动画 |
-| React 组件 | JSX 组件，支持自定义 props |
-| Vue 组件 | SFC 格式，template + scoped styles |
+## 工作流程与验证
 
-## 技术覆盖
+本项目提供规则指导和参考资料。渲染与检查使用宿主项目已有工具，仓库未捆绑独立渲染引擎或自动兼容性测试套件。
 
-涵盖 SVG 规范的 12 个核心领域：
+在宿主环境提供配套工具时，建议对生成的 SVG 进行 XML 语法解析与实际预览。通过 XML 语法校验仅代表代码符合良构规范，并不等同于视觉呈现效果良好或无障碍语义完全适配。
 
-- 画布与坐标系统（viewBox、preserveAspectRatio、响应式缩放）
-- 基础与高级形状（rect、circle、path 等）
-- 完整路径命令（M/L/H/V/C/S/Q/T/A/Z）
-- 文本排版（text、tspan、textPath、多语言支持）
-- 颜色与填充系统
-- 线性渐变与径向渐变
-- 图案（Pattern）
-- 变换（translate、rotate、scale、matrix 等）
-- 裁剪与遮罩（clipPath、mask）
-- 滤镜（模糊、阴影、颜色矩阵、位移贴图、湍流等）
-- 描边属性
-- 标记（Marker）
+---
 
-## 知识体系
+## 参考资料与开源协议说明
 
-内置 6 大主题的 SVG 参考知识库（127 个参考文件），按需加载：
+仓库包含 [Apache-2.0 许可证](LICENSE)。第三方参考资料的来源与许可需要单独确认。
 
-| 主题 | 覆盖领域 |
-|------|---------|
-| SVG 基础 | 形状、坐标、路径、变换、滤镜 |
-| 文本排版 | 文本布局、文本路径、国际化 |
-| 颜色与视觉 | 颜色、渐变、图案、纹理 |
-| 动画 | CSS 动画、精灵图、响应式动画、数据可视化动画 |
-| Web 集成 | SVG + CSS3 + HTML5 综合实践 |
-| 现代技术 | 现代工具链、高级路径、现代色彩 |
+本技能索引了 127 份源自 6 本 SVG 书籍（包括 *SVG Essentials*、*SVG Text Layout*、*SVG Colors Patterns & Gradients*、*SVG Animations*、*Using SVG with CSS3 and HTML5* 与 *Modern SVG*）的参考资料。第三方书籍衍生内容的重新分发授权尚未核实，仓库许可证的存在不代表已获得这些图书内容的再分发授权。再次分发前，应确认许可，或以原创笔记和官方文档链接替换。
 
-## 安装
+---
 
-**Claude Code：**
-```bash
-cp -r svg-foundry-skill ~/.claude/skills/svg-foundry
+## 安装与智能体配置
+
+不同智能体宿主环境的调用机制存在差异。部分工具支持 `/svg-craft` 斜杠命令，而其他系统则通过系统提示词（System Prompt）或配置文件进行加载。
+
+### 1. 配置技能路径
+通过宿主支持的 skill 机制，将仓库注册为 `svg-craft`。保持 `SKILL.md` 与 `references/` 的相对位置。不同助手没有统一的安装目录。
+
+*多智能体部署建议*：若在同一工作站上运行多个智能体工具，建议使用符号链接（symlink）统一指向同一份物理仓库，避免副本分化与维护脱节。
+
+### 2. 调用说明
+
+- **支持指令路由的环境**：输入 `/svg-craft <需求描述>`。
+- **常规对话或 API 宿主**：在上下文或系统提示中引用该技能规则集。
+
+---
+
+## 使用示例
+
+```text
+用 svg-craft 做一个 24px 的设置图标，颜色跟随 currentColor。
+用 svg-craft 把这份 SVG 改成 React 组件，每个实例的 ID 保持唯一。
+用 svg-craft 加入加载动画，并提供减少动态效果的版本。
 ```
 
-**其他 AI Agent：**
-将 `SKILL.md` 作为 system prompt 加载，`references/` 目录作为可检索知识库挂载。详见 [SKILL_METADATA.yaml](SKILL_METADATA.yaml)。
+已知项目格式时沿用项目约定，否则默认输出独立 SVG。只有未确定的选择会实质影响结果时才追问。
 
-## 使用方式
+## 示例代码
 
-在对话中使用触发关键词即可自动激活：
+### 独立装饰性图标
 
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 16 14"/>
+</svg>
 ```
-画SVG、做个SVG、SVG图标、SVG动画、SVG图表、优化SVG
-draw SVG、create SVG、SVG icon、SVG animation、SVG chart
+
+### 附带语义标题与渐变的信息型 SVG
+
+下面的 ID 供单个实例使用；封装为可重复使用的组件时，应生成各实例唯一的 ID。曲线仅作示意，不代表实测数据。
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-labelledby="chart-title">
+  <title id="chart-title">销售增长趋势曲线</title>
+  <defs>
+    <linearGradient id="line-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <path d="M 10 80 Q 40 20 90 20" stroke="url(#line-grad)" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>
 ```
-
-或通过斜杠命令手动调用：`/svg-craft`
-
-## 设计理念
-
-- **知识驱动** — 通过结构化知识体系指导 AI 输出，而非硬编码脚本
-- **按需加载** — 根据当前任务精确读取相关参考章节，避免信息过载
-- **结构化工作流** — 5 步标准流程（需求澄清 → 设计 → 动画 → 集成 → 输出）确保质量一致性
-- **无障碍优先** — 默认包含 `<title>`、`aria-labelledby`、`prefers-reduced-motion` 等无障碍支持
-
-## 许可证
-
-Apache License 2.0

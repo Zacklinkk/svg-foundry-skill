@@ -1,98 +1,98 @@
-<p align="center">
-  <img src="assets/banner.svg" alt="SVG Foundry Banner" width="100%">
-</p>
+# SVG Foundry (`svg-craft`)
 
-<p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/Version-1.0.0-green.svg" alt="Version">
-  <img src="https://img.shields.io/badge/References-127_files-purple.svg" alt="References">
-  <img src="https://img.shields.io/badge/SVG_Domains-12-orange.svg" alt="Domains">
-  <img src="https://img.shields.io/badge/Output_Formats-4-pink.svg" alt="Formats">
-</p>
+[English](README.md) | [中文](README_zh.md)
 
-<p align="center">
-  <a href="README_zh.md">中文版</a> · <a href="SKILL_METADATA.yaml">Agent Metadata</a> · <a href="https://zacklinkk.github.io/svg-foundry-skill/">Live Demo</a>
-</p>
+**SVG Foundry** provides the `svg-craft` skill: structured authoring, optimization, animation, and restyling instructions for AI agents working with Scalable Vector Graphics.
 
-## Overview
+The skill guides models to author SVG across four output formats:
 
-SVG Foundry is a knowledge-driven AI Skill that creates, optimizes, animates, and restyles SVG graphics from scratch. It includes a comprehensive SVG technical knowledge base covering 12 core areas of the SVG specification, enabling expert-level output for any SVG task.
+- **Standalone SVG**: Clean `.svg` markup with explicit namespaces and viewBoxes.
+- **HTML + SVG**: Complete HTML documents containing inline SVG and CSS animations.
+- **React JSX**: Configurable React components accepting props such as `size`, `color`, and styling overrides.
+- **Vue SFC**: Single-File Components (`<template>` and `<style scoped>`).
 
-## Core Capabilities
+---
 
-- **Create** — Generate SVG icons, illustrations, charts, logos, loading animations from natural language descriptions
-- **Optimize** — Improve existing SVG code for performance, accessibility, and responsiveness
-- **Animate** — Add CSS animations, SMIL animations, or stroke drawing effects to static SVGs
-- **Restyle** — Adjust color schemes, gradients, patterns, and filter effects
+## Scope and Technical Guidance
 
-## Output Formats
+`svg-craft` provides direct guidelines for common SVG authoring tasks:
 
-| Format | Use Case |
-|--------|----------|
-| Pure SVG | Standalone `.svg` file, embeddable anywhere |
-| HTML + SVG | Complete HTML page with inline SVG and CSS animations |
-| React Component | JSX component with customizable props |
-| Vue Component | SFC with template + scoped styles |
+- **Canvas & Coordinates**: Guides `viewBox` usage, explicit or contextual sizing, and coordinate space awareness.
+- **Shapes & Paths**: Covers primitives (`<rect>`, `<circle>`, `<path>`, etc.) and path commands (`M`, `C`, `S`, `Q`, `A`, `Z`).
+- **Styling & Defs**: Reusable linear/radial gradients, patterns, marker definitions, and filter primitives (`feDropShadow`, `feGaussianBlur`, `feColorMatrix`, etc.).
+- **Modern Standards**: Defaults to modern SVG 2 `href` attributes rather than deprecated `xlink:href`, unless older target runtimes specifically require legacy attributes.
+- **Component Safety**: Requires unique IDs across instances for definitions (gradients, clips, masks, and ARIA references) to prevent cross-instance collisions when rendered multiple times on a single page.
+- **Animation**: Covers CSS keyframe animations and SMIL (`<animate>`, `<animateTransform>`). Promotes `prefers-reduced-motion` handling and avoids speculative claims about GPU acceleration.
+- **Accessibility**: Choose an accessible name for informative inline SVG, for example a `<title>` referenced by `aria-labelledby`, and an appropriate role. Hide decorative inline SVG from assistive technology when it adds no information. Embedded `<img>` elements use an appropriate `alt` value. These choices depend on context.
 
-## Technical Coverage
+---
 
-Covers 12 core areas of the SVG specification:
+## Workflow and Validation
 
-- Canvas & coordinate systems (viewBox, preserveAspectRatio, responsive scaling)
-- Basic & advanced shapes (rect, circle, path, etc.)
-- Full path commands (M/L/H/V/C/S/Q/T/A/Z)
-- Text layout (text, tspan, textPath, multilingual support)
-- Colors & fill systems
-- Linear & radial gradients
-- Patterns
-- Transforms (translate, rotate, scale, matrix, etc.)
-- Clipping & masking (clipPath, mask)
-- Filters (blur, shadow, colorMatrix, displacement, turbulence, etc.)
-- Stroke properties
-- Markers
+The repository supplies instructions and references. Rendering and validation use the tools available in the host project; no custom rendering engine or automated compatibility suite is bundled.
 
-## Knowledge Base
+When local tooling is available in the agent harness, the skill encourages XML well-formedness parsing and visual verification. An XML parse verifies syntax only; it does not guarantee aesthetic balance, font availability, or cross-browser fidelity.
 
-Built-in SVG reference knowledge base with 127 reference files across 6 topics, loaded on demand:
+---
 
-| Topic | Coverage |
-|-------|----------|
-| SVG Essentials | Shapes, coordinates, paths, transforms, filters |
-| Text Layout | Text positioning, text paths, internationalization |
-| Colors & Visuals | Colors, gradients, patterns, textures |
-| Animations | CSS animations, sprites, responsive animation, data visualization |
-| Web Integration | SVG + CSS3 + HTML5 best practices |
-| Modern Techniques | Modern toolchains, advanced paths, modern color techniques |
+## Reference Collection and License Distinction
 
-## Installation
+The repository includes an [Apache-2.0 license](LICENSE). Third-party reference material has separate provenance and permissions.
 
-**Claude Code:**
-```bash
-cp -r svg-foundry-skill ~/.claude/skills/svg-foundry
+The repository indexes 127 reference files derived from six published SVG volumes (*SVG Essentials*, *SVG Text Layout*, *SVG Colors Patterns & Gradients*, *SVG Animations*, *Using SVG with CSS3 and HTML5*, and *Modern SVG*). Redistribution rights for material derived from these third-party works have not been verified. The presence of the project license does not establish permission to redistribute those texts. Verify permissions or replace those files with original notes and links before redistributing them.
+
+---
+
+## Installation and Agent Integration
+
+Invocation mechanisms depend on the host harness. While some platforms support slash commands like `/svg-craft`, others load skills automatically via system prompts or configuration files.
+
+### 1. Registering the Skill
+Register the repository directory under the name `svg-craft` using your host's supported skill mechanism. Keep `SKILL.md` and `references/` together so relative paths work. There is no universal installation path shared by every agent.
+
+*Tip for multi-agent setups:* If you use multiple local agents, symlink to a single canonical checkout rather than copying the directory, ensuring updates remain synchronized across tools.
+
+### 2. Invocation
+
+- **In harnesses with command routing**: Trigger via `/svg-craft <your prompt>`.
+- **In standard chat or API harnesses**: Reference the skill by name or paste the instructions into your system or workspace context.
+
+---
+
+## Example Requests
+
+```text
+Use svg-craft to create a 24px settings icon that inherits currentColor.
+Use svg-craft to convert this SVG to React with unique IDs per instance.
+Use svg-craft to add a loading animation with a reduced-motion alternative.
 ```
 
-**Other AI Agents:**
-Load `SKILL.md` as a system prompt and mount the `references/` directory as a searchable knowledge base. See [SKILL_METADATA.yaml](SKILL_METADATA.yaml) for structured integration details.
+The skill uses the project format when known and otherwise defaults to standalone SVG. It asks only about unresolved choices that materially affect the result.
 
-## Usage
+## Markup Examples
 
-Automatically triggered by keywords in conversation:
+### Standalone Decorative Icon
 
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 16 14"/>
+</svg>
 ```
-draw SVG, create SVG, SVG icon, SVG animation, SVG chart
-SVG illustration, SVG gradient, SVG filter, SVG pattern
-SVG logo, SVG spinner, SVG progress
+
+### Informative Inline SVG with Gradient
+
+The following IDs are for one instance; generate unique IDs when reusing the graphic in a component. The curve is illustrative, not a chart of measured data.
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-labelledby="chart-title">
+  <title id="chart-title">Sales growth trend line</title>
+  <defs>
+    <linearGradient id="line-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <path d="M 10 80 Q 40 20 90 20" stroke="url(#line-grad)" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>
 ```
-
-Or invoke manually via slash command: `/svg-craft`
-
-## Design Philosophy
-
-- **Knowledge-driven** — Guides AI output through structured knowledge, not hardcoded scripts
-- **On-demand loading** — Loads only relevant reference chapters for the current task
-- **Structured workflow** — 5-step process (clarify → design → animate → integrate → deliver) ensures consistent quality
-- **Accessibility-first** — Includes `<title>`, `aria-labelledby`, `prefers-reduced-motion` support by default
-
-## License
-
-Apache License 2.0
